@@ -29,22 +29,13 @@ public class PagesController {
 	@GetMapping(RouteBuilder.PAGE_URL)
 	public String page1(Model model) {
 		model.addAttribute("devMode", activeProfile.contains("dev"));
-		model.addAttribute("greetee", "You");
-		record JJJ(String message) {
-		}
-		;
-		model.addAttribute("jjj", jsonMapper.writeValueAsString(
-			new JJJ("myJJJ")
-		));
+
 		var vm = new OOBPersonPageModel(
 			peopleService.personTableModel(),
 			RouteBuilder.url(RouteBuilder.PERSON_TABLE_URL)
 		);
-
-		model.addAttribute("vmj", vm);
-		record WWW(OOBPersonPageModel vm) {
-		}
-		model.addAttribute("vm", jsonMapper.writeValueAsString(new WWW(vm)));
+		record VMWrapper(OOBPersonPageModel vm) { }
+		model.addAttribute("vm", jsonMapper.writeValueAsString(new VMWrapper(vm)));
 		return "pages/page1";
 	}
 
