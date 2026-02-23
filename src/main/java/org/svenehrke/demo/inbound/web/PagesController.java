@@ -1,4 +1,4 @@
-package org.svenehrke.demo.web;
+package org.svenehrke.demo.inbound.web;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -20,10 +20,10 @@ public class PagesController {
 
 	@GetMapping("/")
 	public String redirectRoot() {
-		return "redirect:/ui/pages/page1";
+		return "redirect:" + RouteBuilder.PAGE_URL;
 	}
 
-	@GetMapping("/ui/pages/page1")
+	@GetMapping(RouteBuilder.PAGE_URL)
 	public String page1(Model model) {
 		model.addAttribute("devMode", activeProfile.contains("dev"));
 		model.addAttribute("greetee", "You");
