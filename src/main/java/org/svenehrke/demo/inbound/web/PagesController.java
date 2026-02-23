@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.svenehrke.demo.core.PeopleService;
 import tools.jackson.databind.json.JsonMapper;
 
-import java.util.List;
-
 @Controller
 public class PagesController {
 
@@ -43,7 +41,10 @@ public class PagesController {
 			RouteBuilder.url(RouteBuilder.PERSON_TABLE_URL)
 		);
 
-		model.addAttribute("vm", vm);
+		model.addAttribute("vmj", vm);
+		record WWW(OOBPersonPageModel vm) {
+		}
+		model.addAttribute("vm", jsonMapper.writeValueAsString(new WWW(vm)));
 		return "pages/page1";
 	}
 

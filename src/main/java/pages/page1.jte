@@ -3,7 +3,8 @@
 @param boolean devMode
 @param String greetee
 @param String jjj
-@param OOBPersonPageModel vm
+@param String vm
+@param OOBPersonPageModel vmj
 
 
 <!DOCTYPE html>
@@ -44,6 +45,9 @@
 <div data-island="x/parent" data-props="${jjj}"></div>
 <hr>
 
-<div>total: ${vm.table().total()}</div>
+<div>total: ${vmj.table().total()}</div>
+
+<div data-island="page" data-props="${vm}"></div>
+
 </body>
 </html>
