@@ -1,6 +1,10 @@
+@import org.svenehrke.demo.inbound.web.OOBPersonPageModel
+
 @param boolean devMode
 @param String greetee
 @param String jjj
+@param OOBPersonPageModel vm
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,5 +43,7 @@
 <h1>Component tree (parent and child)</h1>
 <div data-island="x/parent" data-props="${jjj}"></div>
 <hr>
+
+<div>total: ${vm.table().total()}</div>
 </body>
 </html>

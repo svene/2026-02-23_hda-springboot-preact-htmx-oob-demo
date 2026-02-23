@@ -7,7 +7,6 @@
     "jsxImportSource": "preact",
     "strict": true,
     "skipLibCheck": true
-    }
   }
 }
 
