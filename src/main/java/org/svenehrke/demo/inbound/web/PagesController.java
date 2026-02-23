@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.svenehrke.demo.core.PeopleService;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.util.List;
@@ -12,12 +13,14 @@ import java.util.List;
 public class PagesController {
 
 	private final JsonMapper jsonMapper;
+	private final PeopleService peopleService;
 
 	@Value("${spring.profiles.active:}")
 	private String activeProfile;
 
-	public PagesController(JsonMapper jsonMapper) {
+	public PagesController(JsonMapper jsonMapper, PeopleService peopleService) {
 		this.jsonMapper = jsonMapper;
+		this.peopleService = peopleService;
 	}
 
 	@GetMapping("/")
@@ -35,15 +38,11 @@ public class PagesController {
 		model.addAttribute("jjj", jsonMapper.writeValueAsString(
 			new JJJ("myJJJ")
 		));
-		OOBPersonPageModel vm = new OOBPersonPageModel(
-			new OOBPersonTableModel(
-				List.of(
-					new OOBPersonTableRowModel(1, "Sven", "Ehrke", "street", "detailsLink")
-				),
-				20
-			),
-			"tableLink"
+		var vm = new OOBPersonPageModel(
+			peopleService.personTableModel(),
+			RouteBuilder.url(RouteBuilder.PERSON_TABLE_URL)
 		);
+
 		model.addAttribute("vm", vm);
 		return "pages/page1";
 	}
