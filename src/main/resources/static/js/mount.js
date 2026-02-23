@@ -4,8 +4,10 @@ document.querySelectorAll("[data-island]").forEach(async (el) => {
 
 	try {
 		const {render, h, App} = await import(`/assets/fe/${name}.js`);
+		// since render always sets innerHTML use parent to remove element after it has been processed:
+		const parent = el.parentElement;
 		el.innerHTML = "";
-		render(h(App, props), el);
+		render(h(App, props), parent);
 	} catch (err) {
 		console.error(`Failed to mount island "${name}":`, err);
 		el.innerHTML = '<div class="alert alert-error">Component could not be loaded.</div>';
