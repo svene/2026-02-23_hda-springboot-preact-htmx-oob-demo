@@ -13,12 +13,15 @@
 	@if(devMode)
 		<script src="http://localhost:35729/livereload.js"></script>
 	@endif
-	<script src="/assets/js/htmx.org/2.0.8/htmx.js"></script>
 	<script src="/assets/js/htmx.org/extensions/path-params.js"></script>
 	<script src="/assets/js/hyperscript.org/0.9.14/_hyperscript.js"></script>
 	<script defer src="/assets/js/main.js"></script>
 	<script defer src="/assets/js/alpinejs/3.15.4/cdn.min.js"></script>
 	<script src="/assets/js/mount.js" type="module"></script>
+	<script src="/assets/js/htmx.org/2.0.8/htmx.js"></script>
+	<script>
+		//htmx.logAll();
+	</script>
 
 </head>
 <body>

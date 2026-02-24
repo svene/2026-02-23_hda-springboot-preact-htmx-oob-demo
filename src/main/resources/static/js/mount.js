@@ -8,6 +8,7 @@ document.querySelectorAll("[data-island]").forEach(async (el) => {
 		const parent = el.parentElement;
 		el.innerHTML = "";
 		render(h(App, props), parent);
+		htmx.process(parent)
 	} catch (err) {
 		console.error(`Failed to mount island "${name}":`, err);
 		el.innerHTML = '<div class="alert alert-error">Component could not be loaded.</div>';
