@@ -1,9 +1,11 @@
 package org.svenehrke.demo.inbound.web;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.svenehrke.demo.core.PeopleService;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -38,5 +40,15 @@ public class PagesController {
 		model.addAttribute("vm", jsonMapper.writeValueAsString(new VMWrapper(vm)));
 		return "pages/page1";
 	}
+
+/*
+	@GetMapping(RouteBuilder.DETAILS_URL)
+	public ResponseEntity<String> details(@PathVariable int id, Model model) {
+		OOBPersonDetailModel vm = peopleService.personDetailModel(id);
+		record VMWrapper(OOBPersonDetailModel vm) { }
+		model.addAttribute("vm", jsonMapper.writeValueAsString(new VMWrapper(vm)));
+		return honoApi.personDetails(peopleService.personDetailModel(id));
+	}
+*/
 
 }
