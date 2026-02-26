@@ -6,7 +6,7 @@ export const PersonRow = (props: {vm: OOBPersonTableRowModel}) => (
 		style="cursor: pointer"
 		hx-trigger="click"
 		hx-target="this"
-		hx-swap="outerHTML"
+		hx-swap="outerHTML transition:true"
 		hx-get={props.vm._detailsLink}
 	>
 		<td hx-trigger="click consume"> {/* consume: prevent bubbling, only checkbox needs to be clicked, not parents*/}

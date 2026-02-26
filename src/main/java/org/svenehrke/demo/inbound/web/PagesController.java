@@ -41,14 +41,13 @@ public class PagesController {
 		return "pages/page1";
 	}
 
-/*
 	@GetMapping(RouteBuilder.DETAILS_URL)
-	public ResponseEntity<String> details(@PathVariable int id, Model model) {
+	public String details(@PathVariable int id, Model model) {
 		OOBPersonDetailModel vm = peopleService.personDetailModel(id);
 		record VMWrapper(OOBPersonDetailModel vm) { }
 		model.addAttribute("vm", jsonMapper.writeValueAsString(new VMWrapper(vm)));
-		return honoApi.personDetails(peopleService.personDetailModel(id));
+		return "pages/f";
+//		return honoApi.personDetails(peopleService.personDetailModel(id));
 	}
-*/
 
 }

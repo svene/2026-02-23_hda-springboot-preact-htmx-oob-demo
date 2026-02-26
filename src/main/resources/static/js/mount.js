@@ -4,12 +4,43 @@ async function doit(el) {
 
 	try {
 		const {render, h, App} = await import(`/assets/fe/${name}.js`);
-		// since render always sets innerHTML use parent to remove element after it has been processed:
-		const parent = el.parentElement;
-		el.innerHTML = "";
-		console.log('rendering');
-		render(h(App, props), parent);
-		htmx.process(parent)
+		// Step 1: Create a temporary wrapper (DocumentFragment):
+		const wrapper = document.createDocumentFragment();
+
+		// Step 2: Render the App into the fragment:
+		render(h(App, props), wrapper);
+
+		// Version with only one root element coming in:
+/*
+		// Step 3: Extract the rendered element:
+		const renderedEl = wrapper.firstElementChild;
+		if (renderedEl) {
+			// Step 4: Replace the original placeholder with the rendered element
+			el.replaceWith(renderedEl);
+			// Step 5: Run htmx processing on the new element:
+			htmx.process(renderedEl);
+		}
+*/
+
+		// Version with multiple root elements coming in:
+		// Step 3: Insert all rendered children before the placeholder
+		const parent = el.parentNode;
+		let next = el.nextSibling;
+		const newNodes = [];
+		Array.from(wrapper.childNodes).forEach(node => {
+			if (next) {
+				parent.insertBefore(node, next); // insert before next sibling
+			} else {
+				parent.appendChild(node); // explicit append if next is null
+			}
+			newNodes.push(node);
+		});
+
+		// Step 4: Remove the placeholder
+		el.remove();
+
+		// Step 5: Run htmx processing on only the new nodes
+		newNodes.forEach(node => htmx.process(node));
 	} catch (err) {
 		console.error(`Failed to mount island "${name}":`, err);
 		el.innerHTML = '<div class="alert alert-error">Component could not be loaded.</div>';
@@ -17,7 +48,8 @@ async function doit(el) {
 }
 
 function processIslands() {
-	const els = document.body.querySelectorAll('div[data-island]:not([processed])')
+	console.log("processIslands");
+	const els = document.body.querySelectorAll('[data-island]:not([processed])')
 	els.forEach(async (el) => {
 		el.setAttribute('processed', '');
 		console.log('island', el.dataset.island);
@@ -25,18 +57,9 @@ function processIslands() {
 	});
 }
 
-window.preactObserver = new MutationObserver((mutations) => {
-	processIslands();
-});
-window.preactObserver.observe(document.documentElement, {childList: true, subtree: true});
-
 // initial:
 processIslands();
-
-/*
-// TODO: replace MutationObserver with:
-processIslands();
-document.body.addEventListener("htmx:afterSwap", (evt) => {
+document.body.addEventListener("htmx:afterSettle", (evt) => {
+	console.log("htmx:afterSettle");
 	processIslands(evt.target);
 });
-*/
