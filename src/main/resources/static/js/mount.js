@@ -3,12 +3,12 @@ async function doit(el) {
 	const props = JSON.parse(el.dataset.props || "{}");
 
 	try {
-		const {render, h, App} = await import(`/assets/fe/${name}.js`);
+		const {render, h, Cmp} = await import(`/assets/fe/${name}.js`);
 		// Step 1: Create a temporary wrapper (DocumentFragment):
 		const wrapper = document.createDocumentFragment();
 
 		// Step 2: Render the App into the fragment:
-		render(h(App, props), wrapper);
+		render(h(Cmp, props), wrapper);
 
 		// Version with only one root element coming in:
 /*

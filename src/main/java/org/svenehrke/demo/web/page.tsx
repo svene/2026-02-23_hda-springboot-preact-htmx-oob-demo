@@ -2,7 +2,7 @@ import {render, h} from "preact";
 import {OOBPersonPageModel} from "../inbound/web/vm/oob-person-page-model-vm";
 import {PersonTable} from "./persontable";
 
-function App(props: { vm: OOBPersonPageModel }) {
+export function Cmp(props: { vm: OOBPersonPageModel }) {
 	return (
 		<>
 			<div className="container mt-1">
@@ -32,4 +32,4 @@ function App(props: { vm: OOBPersonPageModel }) {
 		;
 }
 
-export {render, h, App}
+export {render, h}
