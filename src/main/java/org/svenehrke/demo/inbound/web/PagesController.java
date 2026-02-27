@@ -36,18 +36,20 @@ public class PagesController {
 			peopleService.personTableModel(),
 			RouteBuilder.url(RouteBuilder.PERSON_TABLE_URL)
 		);
-		record VMWrapper(OOBPersonPageModel vm) { }
-		model.addAttribute("vm", jsonMapper.writeValueAsString(new VMWrapper(vm)));
+		model.addAttribute("vm", makeVM(vm));
 		return "pages/page1";
 	}
 
 	@GetMapping(RouteBuilder.DETAILS_URL)
 	public String details(@PathVariable int id, Model model) {
 		OOBPersonDetailModel vm = peopleService.personDetailModel(id);
-		record VMWrapper(OOBPersonDetailModel vm) { }
-		model.addAttribute("vm", jsonMapper.writeValueAsString(new VMWrapper(vm)));
-		return "pages/f";
-//		return honoApi.personDetails(peopleService.personDetailModel(id));
+		model.addAttribute("vm", makeVM(vm));
+		return "pages/persondetailrow";
+	}
+
+	private String makeVM(Object vm) {
+		record VMWrapper(Object vm) { }
+		return jsonMapper.writeValueAsString(new VMWrapper(vm));
 	}
 
 }
