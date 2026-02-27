@@ -40,10 +40,7 @@
 	</div>
 </section>
 
-<%-- wrapper element (see mount.js) --%>
-<%--<div wrapper> --%>
 <div data-island="page" data-props="${vm}"></div>
-<%--</div>--%>
 
 </body>
 </html>
