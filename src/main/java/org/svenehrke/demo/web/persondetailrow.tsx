@@ -1,7 +1,7 @@
-import {OOBPersonDetailModel} from "./oob-person-page-model-vm";
 import {render, h} from "preact";
+import {OOBPersonDetailModel} from "../inbound/web/vm/oob-person-page-model-vm";
 
-export const Cmp = (props: { vm: OOBPersonDetailModel }) => (
+export const PersondetailsRow = (props: { vm: OOBPersonDetailModel }) => (
 		<>
 			<tr
 				id={`row-${props.vm.id}`}
@@ -19,4 +19,4 @@ export const Cmp = (props: { vm: OOBPersonDetailModel }) => (
 			</tr>
 		</>
 );
-export {render, h}
+export {render, h, PersondetailsRow as Cmp}

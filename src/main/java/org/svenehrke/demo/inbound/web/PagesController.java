@@ -43,7 +43,7 @@ public class PagesController {
 	@GetMapping(RouteBuilder.DETAILS_URL)
 	public String details(@PathVariable int id, Model model) {
 		OOBPersonDetailModel vm = peopleService.personDetailModel(id);
-		model.addAttribute("cmpName", "persondetailrow");
+		model.addAttribute("cmpName", "persondetails");
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/tr";
 	}
