@@ -1,10 +1,12 @@
 package org.svenehrke.demo.inbound.web;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.svenehrke.demo.core.PeopleService;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -63,9 +65,23 @@ public class PagesController {
 		return "pages/tr";
 	}
 
+	@GetMapping(RouteBuilder.DETAILS_CARD_URL)
+	public String detailsCard(@PathVariable int id, Model model) {
+		OOBPersonDetailModel vm = peopleService.personDetailModel(id);
+		model.addAttribute("cmpName", "persondetailscard");
+		model.addAttribute("vm", makeVM(vm));
+		return "pages/tr";
+	}
+
+	@PutMapping(RouteBuilder.PERSON_URL)
+	public void updatePerson(@PathVariable int id, OOBPersonEditModel personEditModel, HttpServletResponse response) {
+		peopleService.updatePerson(id, personEditModel);
+		response.setHeader(HTMXConsts.HX_TRIGGER, """
+			{"%s": {"id": %d}}\
+			""".formatted(OobHonoWebApiSharedConsts.EvtBackendEvents.PERSON_UPDATED, id));
+	}
 	private String makeVM(Object vm) {
 		record VMWrapper(Object vm) { }
 		return jsonMapper.writeValueAsString(new VMWrapper(vm));
 	}
-
 }

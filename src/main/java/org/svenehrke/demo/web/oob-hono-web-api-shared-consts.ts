@@ -10,3 +10,6 @@ export const OOBHonoWebApiConsts = {
 	PERSON_DETAILS_CARD: `${BASE}/person/detailscard`,
 	DELETE: `${BASE}/delete`,
 };
+export const EvtBackendEvents = {
+	PERSON_UPDATED: 'person-updated',
+};
