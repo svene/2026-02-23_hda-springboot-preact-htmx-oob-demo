@@ -48,6 +48,14 @@ public class PagesController {
 		return "pages/tr";
 	}
 
+	@GetMapping(RouteBuilder.DETAILS_BACK_URL)
+	public String detailsBack(@PathVariable int id, Model model) {
+		OOBPersonTableRowModel vm = peopleService.personTableRowModel(id);
+		model.addAttribute("cmpName", "persondetailsback");
+		model.addAttribute("vm", makeVM(vm));
+		return "pages/tr";
+	}
+
 	@GetMapping(RouteBuilder.EDIT_URL)
 	public String edit(@PathVariable int id, Model model) {
 		OOBPersonEditModel vm = peopleService.personEditModel(id);

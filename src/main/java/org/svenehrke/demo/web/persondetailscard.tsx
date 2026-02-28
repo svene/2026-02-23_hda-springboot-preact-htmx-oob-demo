@@ -10,6 +10,7 @@ export const PersondetailsCard = (props: { vm: OOBPersonDetailModel }) => (
 			hx-target="this"
 			hx-swap="outerHTML transition:true"
 			hx-get={props.vm._editLink}
+			_="on click from previous <tr/> remove me"
 		>
 			<td colSpan={5} style="padding-left: 30px">
 
