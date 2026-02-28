@@ -9,7 +9,7 @@ export const PersondetailsRow = (props: { vm: OOBPersonDetailModel }) => (
 				hx-trigger="click"
 				hx-target="this"
 				hx-swap="outerHTML transition:true"
-				hx-get={props.vm._backLink}
+				hx-get={props.vm._rowUrl}
 			>
 				<td style="border-style: none"></td>
 				<td style="border-style: none">{props.vm.firstName}</td>

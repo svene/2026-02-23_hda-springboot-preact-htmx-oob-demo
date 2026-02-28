@@ -27,7 +27,6 @@ export type OOBPersonDetailModel = {
 	mailBox: string,
 	phoneNumber: string,
 	cellPhone: string,
-	_backLink: string,
 	_editLink: string,
 	_rowUrl: string,
 }

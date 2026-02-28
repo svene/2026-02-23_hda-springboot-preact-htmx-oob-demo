@@ -7,7 +7,6 @@ public interface RouteBuilder {
 	String DETAILS_URL = "/person/{id}/details";
 	String DETAILS_ROW_URL = "/person/{id}/detailsrow";
 	String DETAILS_CARD_URL = "/person/{id}/detailscard";
-	String DETAILS_BACK_URL = "/person/{id}/detailsback";
 	String EDIT_URL = "/person/{id}/edit";
 	String ROW_URL = "/person/{id}/row";
 	String PERSON_URL = "/person/{id}";
@@ -22,9 +21,6 @@ public interface RouteBuilder {
 	}
 	static String detailsUrl(int id) {
 		return idUrl(RouteBuilder.DETAILS_URL, id);
-	}
-	static String detailsBackUrl(int id) {
-		return idUrl(RouteBuilder.DETAILS_BACK_URL, id);
 	}
 	static String editUrl(int id) {
 		return idUrl(RouteBuilder.EDIT_URL, id);
