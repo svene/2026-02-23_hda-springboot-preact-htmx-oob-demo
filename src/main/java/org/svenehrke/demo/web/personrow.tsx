@@ -1,3 +1,4 @@
+import {render, h} from "preact";
 import {OOBPersonTableRowModel} from "../inbound/web/vm/oob-person-page-model-vm";
 
 export const PersonRow = (props: {vm: OOBPersonTableRowModel}) => (
@@ -19,3 +20,4 @@ export const PersonRow = (props: {vm: OOBPersonTableRowModel}) => (
 	</tr>
 
 );
+export {render, h, PersonRow as Cmp}

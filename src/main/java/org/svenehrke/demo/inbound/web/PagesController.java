@@ -48,6 +48,15 @@ public class PagesController {
 		return "pages/tr";
 	}
 
+	@GetMapping(RouteBuilder.ROW_URL)
+	public String row(@PathVariable int id, Model model) {
+		OOBPersonTableRowModel vm = peopleService.personTableRowModel(id);
+		model.addAttribute("cmpName", "personrow");
+		model.addAttribute("vm", makeVM(vm));
+		return "pages/tr";
+	}
+
+/* TODO: remove
 	@GetMapping(RouteBuilder.DETAILS_BACK_URL)
 	public String detailsBack(@PathVariable int id, Model model) {
 		OOBPersonTableRowModel vm = peopleService.personTableRowModel(id);
@@ -55,6 +64,7 @@ public class PagesController {
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/tr";
 	}
+*/
 
 	@GetMapping(RouteBuilder.EDIT_URL)
 	public String edit(@PathVariable int id, Model model) {
