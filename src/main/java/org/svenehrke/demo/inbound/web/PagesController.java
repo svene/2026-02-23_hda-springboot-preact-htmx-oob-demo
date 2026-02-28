@@ -48,6 +48,14 @@ public class PagesController {
 		return "pages/tr";
 	}
 
+	@GetMapping(RouteBuilder.EDIT_URL)
+	public String edit(@PathVariable int id, Model model) {
+		OOBPersonEditModel vm = peopleService.personEditModel(id);
+		model.addAttribute("cmpName", "personedit");
+		model.addAttribute("vm", makeVM(vm));
+		return "pages/tr";
+	}
+
 	private String makeVM(Object vm) {
 		record VMWrapper(Object vm) { }
 		return jsonMapper.writeValueAsString(new VMWrapper(vm));

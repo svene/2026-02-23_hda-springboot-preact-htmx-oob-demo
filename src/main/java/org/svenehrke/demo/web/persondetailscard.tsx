@@ -8,7 +8,7 @@ export const PersondetailsCard = (props: { vm: OOBPersonDetailModel }) => (
 			style="cursor: pointer"
 			hx-trigger="click"
 			hx-target="this"
-			hx-swap="outerHTML"
+			hx-swap="outerHTML transition:true"
 			hx-get={props.vm._editLink}
 		>
 			<td colSpan={5} style="padding-left: 30px">
