@@ -2,11 +2,13 @@ package org.svenehrke.demo.inbound.web;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.svenehrke.demo.core.PeopleService;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -80,6 +82,14 @@ public class PagesController {
 			{"%s": {"id": %d}}\
 			""".formatted(OobHonoWebApiSharedConsts.EvtBackendEvents.PERSON_UPDATED, id));
 	}
+	@GetMapping(RouteBuilder.PERSON_TABLE_URL)
+	public String peopleUrl(@RequestParam() String search, Model model) {
+		OOBPersonTableModel vm = peopleService.peopleForSearch(search);
+		model.addAttribute("cmpName", "persontable");
+		model.addAttribute("vm", makeVM(vm));
+		return "pages/div";
+	}
+
 	private String makeVM(Object vm) {
 		record VMWrapper(Object vm) { }
 		return jsonMapper.writeValueAsString(new VMWrapper(vm));

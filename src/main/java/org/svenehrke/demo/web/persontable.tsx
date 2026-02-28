@@ -1,3 +1,4 @@
+import {render, h} from "preact";
 import {OOBPersonTableModel} from "../inbound/web/vm/oob-person-page-model-vm";
 import {OOBHonoWebApiConsts} from "./oob-hono-web-api-shared-consts";
 import {PersonRow} from "./personrow";
@@ -32,3 +33,4 @@ export const PersonTable = (props: { vm: OOBPersonTableModel }) => (
 
 	</div>
 );
+export {render, h, PersonTable as Cmp}
