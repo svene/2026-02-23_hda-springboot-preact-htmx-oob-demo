@@ -30,6 +30,7 @@ export type OOBPersonDetailModel = {
 	cellPhone: string,
 	_editLink: string,
 	_rowUrl: string,
+	_detailsRowUrl: string,
 }
 
 export type OOBPersonEditModel = {

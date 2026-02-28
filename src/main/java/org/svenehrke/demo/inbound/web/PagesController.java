@@ -83,6 +83,14 @@ public class PagesController {
 			{"%s": {"id": %d}}\
 			""".formatted(OobHonoWebApiSharedConsts.EvtBackendEvents.PERSON_UPDATED, id));
 	}
+	@GetMapping(RouteBuilder.DETAILS_ROW_URL)
+	public String detailsRow(@PathVariable int id, Model model) {
+		OOBPersonDetailModel vm = peopleService.personDetailModel(id);
+		model.addAttribute("cmpName", "persondetailrow");
+		model.addAttribute("vm", makeVM(vm));
+		return "pages/tr";
+	}
+
 	@GetMapping(RouteBuilder.PERSON_TABLE_URL)
 	public String peopleUrl(@RequestParam() String search, Model model) {
 		OOBPersonTableModel vm = peopleService.peopleForSearch(search);

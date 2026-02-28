@@ -22,6 +22,9 @@ public interface RouteBuilder {
 	static String detailsUrl(int id) {
 		return idUrl(RouteBuilder.DETAILS_URL, id);
 	}
+	static String detailsRowUrl(int id) {
+		return idUrl(RouteBuilder.DETAILS_ROW_URL, id);
+	}
 	static String editUrl(int id) {
 		return idUrl(RouteBuilder.EDIT_URL, id);
 	}

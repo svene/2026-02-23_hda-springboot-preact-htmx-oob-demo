@@ -1,5 +1,6 @@
 import {render, h} from "preact";
 import {OOBPersonDetailModel} from "../inbound/web/vm/oob-person-page-model-vm";
+import {EvtBackendEvents} from "./oob-hono-web-api-shared-consts";
 
 export const PersondetailsRow = (props: { vm: OOBPersonDetailModel }) => (
 		<>
@@ -11,6 +12,14 @@ export const PersondetailsRow = (props: { vm: OOBPersonDetailModel }) => (
 				hx-swap="outerHTML transition:true"
 				hx-get={props.vm._rowUrl}
 			>
+				<template
+					hx-trigger={`
+			${EvtBackendEvents.PERSON_UPDATED}[event.detail.id === ${props.vm.id}] from:body
+			`}
+					hx-target="closest tr"
+					hx-swap="outerHTML"
+					hx-get={props.vm._detailsRowUrl}
+				></template>
 				<td style="border-style: none"></td>
 				<td style="border-style: none">{props.vm.firstName}</td>
 				<td style="border-style: none">{props.vm.lastName}</td>
