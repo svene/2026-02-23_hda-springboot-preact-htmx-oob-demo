@@ -40,7 +40,10 @@ async function doit(el) {
 		el.remove();
 
 		// Step 5: Run htmx processing on only the new nodes
-		newNodes.forEach(node => htmx.process(node));
+		newNodes.forEach(node => {
+			htmx.process(node);
+			_hyperscript.processNode(node);
+		});
 	} catch (err) {
 		console.error(`Failed to mount island "${name}":`, err);
 		el.innerHTML = '<div class="alert alert-error">Component could not be loaded.</div>';
