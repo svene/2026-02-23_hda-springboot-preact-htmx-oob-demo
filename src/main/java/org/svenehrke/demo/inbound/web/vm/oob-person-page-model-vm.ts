@@ -9,6 +9,7 @@ export type OOBPersonTableRowModel = {
 export type OOBPersonTableModel = {
 	people: OOBPersonTableRowModel[],
 	total: number,
+	_deleteLink: string,
 }
 export type OOBPersonPageModel = {
 	table: OOBPersonTableModel,

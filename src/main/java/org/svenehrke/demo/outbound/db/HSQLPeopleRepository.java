@@ -35,7 +35,7 @@ public class HSQLPeopleRepository implements PeopleRepository {
 				rs.getString("streetname"),
 				RouteBuilder.detailsUrl(rs.getInt("id"))
 		)).list();
-		return new OOBPersonTableModel(result, total());
+		return new OOBPersonTableModel(result, total(), RouteBuilder.DELETE_URL);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class HSQLPeopleRepository implements PeopleRepository {
 				rs.getString("streetname"),
 				RouteBuilder.detailsUrl(rs.getInt("id"))
 			)).list();
-		return new OOBPersonTableModel(result, total());
+		return new OOBPersonTableModel(result, total(), RouteBuilder.DELETE_URL);
 	}
 
 	@Override

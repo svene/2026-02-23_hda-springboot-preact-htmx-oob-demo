@@ -5,12 +5,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.svenehrke.demo.core.PeopleService;
 import tools.jackson.databind.json.JsonMapper;
+
+import java.util.List;
+
+import static org.svenehrke.demo.inbound.web.HTMXConsts.HX_REDIRECT;
 
 @Controller
 public class PagesController {
@@ -88,6 +89,11 @@ public class PagesController {
 		model.addAttribute("cmpName", "persontable");
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/div";
+	}
+	@DeleteMapping(RouteBuilder.DELETE_URL)
+	public void deleteRows(@RequestParam List<Integer> selection, HttpServletResponse response) {
+		peopleService.deleteByIds(selection);
+		response.setHeader(HX_REDIRECT, RouteBuilder.PAGE_URL);
 	}
 
 	private String makeVM(Object vm) {
