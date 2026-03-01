@@ -9,7 +9,7 @@ export const PersonEditor = ({vm}: { vm: OOBPersonEditModel }) => (
 			${EditEvents.CLOSE_REQUESTED}[event.detail.id === ${vm.id}] from:closest tr
 			`}
 			hx-target="closest tr"
-			hx-swap="outerHTML"
+			hx-swap="outerHTML transition:true"
 			hx-get={vm._editBackLink}
 		></template>
 		<template
@@ -17,7 +17,7 @@ export const PersonEditor = ({vm}: { vm: OOBPersonEditModel }) => (
 			${EvtBackendEvents.PERSON_UPDATED}[event.detail.id === ${vm.id}] from:closest tr
 			`}
 			hx-target="closest tr"
-			hx-swap="outerHTML"
+			hx-swap="outerHTML transition:true"
 			hx-get={vm._editBackLink}
 		></template>
 		<td colSpan={4} style="padding: 0px">

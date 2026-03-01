@@ -20,7 +20,7 @@ export const PersondetailsRow = (props: { vm: OOBPersonDetailModel }) => (
 					hx-swap="outerHTML"
 					hx-get={props.vm._detailsRowUrl}
 				></template>
-				<td style="border-style: none"></td>
+				<td style="border-style: none"><input type="checkbox" disabled value={props.vm.id}></input></td>
 				<td style="border-style: none">{props.vm.firstName}</td>
 				<td style="border-style: none">{props.vm.lastName}</td>
 				<td style="border-style: none">{props.vm.streetName}</td>
