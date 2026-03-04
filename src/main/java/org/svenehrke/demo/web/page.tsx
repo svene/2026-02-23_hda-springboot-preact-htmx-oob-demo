@@ -2,7 +2,11 @@ import {render, h} from "preact";
 import {OOBPersonPageModel} from "../inbound/web/vm/oob-person-page-model-vm";
 import {PersonTable} from "./persontable";
 
+import { useSignal } from '@preact/signals';
+
+
 function Cmp(props: { vm: OOBPersonPageModel }) {
+	const counter = useSignal(0);
 	return (
 		<>
 			<div class="container mt-1">
@@ -22,6 +26,8 @@ function Cmp(props: { vm: OOBPersonPageModel }) {
 							/>
 						</div>
 					</div>
+					<div>{counter}</div>
+					<button class="button" onClick={e => counter.value = counter.value + 1}>Inc</button>
 					<PersonTable vm={props.vm.table}></PersonTable>
 
 				</div>
