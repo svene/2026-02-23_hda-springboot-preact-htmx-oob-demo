@@ -5,14 +5,14 @@ import {PersonTable} from "./persontable";
 function Cmp(props: { vm: OOBPersonPageModel }) {
 	return (
 		<>
-			<div className="container mt-1">
-				<div className="p-1 mt-1 area-border" style="min-height: 500px">
+			<div class="container mt-1">
+				<div class="p-1 mt-1 area-border" style="min-height: 500px">
 
-					<div className="field">
-						<label className="label">Search</label>
-						<div className="control">
+					<div class="field">
+						<label class="label">Search</label>
+						<div class="control">
 							<input
-								className="input"
+								class="input"
 								type="search"
 								name="search"
 								placeholder="Search for firstname or lastname"

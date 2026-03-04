@@ -5,13 +5,13 @@ import {PersonRow} from "./personrow";
 
 export const PersonTable = (props: { vm: OOBPersonTableModel }) => (
 	<div id="result-table">
-		<table className="table">
+		<table class="table">
 			<thead>
 			<tr>
 				<td colSpan={5}>
 					<form id="bulkDeleteForm" hx-delete={props.vm._deleteLink}>
-						<button type="submit" className="button">
-							<span className="icon"><i className="material-icons">delete</i></span>
+						<button type="submit" class="button">
+							<span class="icon"><i class="material-icons">delete</i></span>
 							<span>Delete</span>
 						</button>
 					</form>
