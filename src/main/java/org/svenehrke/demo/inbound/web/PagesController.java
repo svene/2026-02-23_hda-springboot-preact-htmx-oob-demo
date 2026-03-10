@@ -2,11 +2,11 @@ package org.svenehrke.demo.inbound.web;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.svenehrke.demo.core.PeopleService;
+import org.svenehrke.demo.inbound.web.HonoWebApiSharedConsts.HonoWebApiConsts;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.util.List;
@@ -29,79 +29,76 @@ public class PagesController {
 
 	@GetMapping("/")
 	public String redirectRoot() {
-		return "redirect:" + RouteBuilder.PAGE_URL;
+		return "redirect:" + HonoWebApiConsts.PAGE;
 	}
 
-	@GetMapping(RouteBuilder.PAGE_URL)
+	@GetMapping(HonoWebApiConsts.PAGE)
 	public String page1(Model model) {
 		model.addAttribute("devMode", activeProfile.contains("dev"));
 
-		var vm = new OOBPersonPageModel(
-			peopleService.personTableModel(),
-			RouteBuilder.url(RouteBuilder.PERSON_TABLE_URL)
-		);
+		var vm = new PersonPageModel(peopleService.personTableModel());
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/page1";
 	}
 
-	@GetMapping(RouteBuilder.DETAILS_URL)
+	@GetMapping(HonoWebApiConsts.PERSON_DETAILS)
 	public String details(@PathVariable int id, Model model) {
-		OOBPersonDetailModel vm = peopleService.personDetailModel(id);
+		PersonDetailModel vm = peopleService.personDetailModel(id);
 		model.addAttribute("cmpName", "persondetails");
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/tr";
 	}
 
-	@GetMapping(RouteBuilder.ROW_URL)
+	@GetMapping(HonoWebApiConsts.PERSON_ROW)
 	public String row(@PathVariable int id, Model model) {
-		OOBPersonTableRowModel vm = peopleService.personTableRowModel(id);
+		PersonTableRowModel vm = peopleService.personTableRowModel(id);
 		model.addAttribute("cmpName", "personrow");
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/tr";
 	}
 
-	@GetMapping(RouteBuilder.EDIT_URL)
+	@GetMapping(HonoWebApiConsts.PERSON_EDIT)
 	public String edit(@PathVariable int id, Model model) {
-		OOBPersonEditModel vm = peopleService.personEditModel(id);
+		PersonEditModel vm = peopleService.personEditModel(id);
 		model.addAttribute("cmpName", "personedit");
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/tr";
 	}
 
-	@GetMapping(RouteBuilder.DETAILS_CARD_URL)
+	@GetMapping(HonoWebApiConsts.PERSON_DETAILS_CARD)
 	public String detailsCard(@PathVariable int id, Model model) {
-		OOBPersonDetailModel vm = peopleService.personDetailModel(id);
+		PersonDetailModel vm = peopleService.personDetailModel(id);
 		model.addAttribute("cmpName", "persondetailscard");
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/tr";
 	}
 
-	@PutMapping(RouteBuilder.PERSON_URL)
-	public void updatePerson(@PathVariable int id, OOBPersonEditModel personEditModel, HttpServletResponse response) {
+	@PutMapping(HonoWebApiConsts.PERSON)
+	public void updatePerson(@PathVariable int id, PersonEditModel personEditModel, HttpServletResponse response) {
 		peopleService.updatePerson(id, personEditModel);
 		response.setHeader(HTMXConsts.HX_TRIGGER, """
 			{"%s": {"id": %d}}\
-			""".formatted(OobHonoWebApiSharedConsts.EvtBackendEvents.PERSON_UPDATED, id));
+			""".formatted(HonoWebApiSharedConsts.EvtBackendEvents.PERSON_UPDATED, id));
 	}
-	@GetMapping(RouteBuilder.DETAILS_ROW_URL)
+	@GetMapping(HonoWebApiConsts.PERSON_DETAILS_ROW)
 	public String detailsRow(@PathVariable int id, Model model) {
-		OOBPersonDetailModel vm = peopleService.personDetailModel(id);
+		PersonDetailModel vm = peopleService.personDetailModel(id);
 		model.addAttribute("cmpName", "persondetailrow");
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/tr";
 	}
 
-	@GetMapping(RouteBuilder.PERSON_TABLE_URL)
+	@GetMapping(HonoWebApiConsts.PERSON_TABLE)
 	public String peopleUrl(@RequestParam() String search, Model model) {
-		OOBPersonTableModel vm = peopleService.peopleForSearch(search);
+		PersonTableModel vm = peopleService.peopleForSearch(search);
 		model.addAttribute("cmpName", "persontable");
 		model.addAttribute("vm", makeVM(vm));
 		return "pages/div";
 	}
-	@DeleteMapping(RouteBuilder.DELETE_URL)
+	@DeleteMapping(HonoWebApiConsts.DELETE)
 	public void deleteRows(@RequestParam List<Integer> selection, HttpServletResponse response) {
 		peopleService.deleteByIds(selection);
-		response.setHeader(HX_REDIRECT, RouteBuilder.PAGE_URL);
+		response.setHeader(HX_REDIRECT, HonoWebApiConsts.PAGE);
 	}
 
 	private String makeVM(Object vm) {

@@ -1,8 +1,9 @@
 import {render, h} from "preact";
-import {OOBPersonEditModel} from "../inbound/web/vm/oob-person-page-model-vm";
-import {EvtBackendEvents} from "./oob-hono-web-api-shared-consts";
+import {PersonEditModel} from "../inbound/web/vm/person-page-model-vm";
+import {EvtBackendEvents} from "./hono-web-api-shared-consts";
+import {detailsCardUrl, updateUrl} from "./route-builder";
 
-export const PersonEditor = ({vm}: { vm: OOBPersonEditModel }) => (
+export const PersonEditor = ({vm}: { vm: PersonEditModel }) => (
 	<tr id={`row-${vm.id}-edit`}>
 		<template
 			hx-trigger={`
@@ -10,7 +11,7 @@ export const PersonEditor = ({vm}: { vm: OOBPersonEditModel }) => (
 			`}
 			hx-target="closest tr"
 			hx-swap="outerHTML transition:true"
-			hx-get={vm._editBackLink}
+			hx-get={detailsCardUrl(vm.id)}
 		></template>
 		<template
 			hx-trigger={`
@@ -18,7 +19,7 @@ export const PersonEditor = ({vm}: { vm: OOBPersonEditModel }) => (
 			`}
 			hx-target="closest tr"
 			hx-swap="outerHTML transition:true"
-			hx-get={vm._editBackLink}
+			hx-get={detailsCardUrl(vm.id)}
 		></template>
 		<td colSpan={4} style="padding: 0px">
 			<div class="card p-5 my-2">
@@ -62,7 +63,7 @@ export const PersonEditor = ({vm}: { vm: OOBPersonEditModel }) => (
 							type="submit"
 							class="level-item button is-primary"
 							hx-trigger="click consume"
-							hx-put={`${vm._submitLink}`} /* Expects backend to respond with 'person-updated'(id) event */
+							hx-put={updateUrl(vm.id)} /* Expects backend to respond with 'person-updated'(id) event */
 							hx-swap="none" /* Works with event handling of 'person-updated' */
 						>Save
 						</button>

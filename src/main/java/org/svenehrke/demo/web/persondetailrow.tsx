@@ -1,8 +1,9 @@
 import {render, h} from "preact";
-import {OOBPersonDetailModel} from "../inbound/web/vm/oob-person-page-model-vm";
-import {EvtBackendEvents} from "./oob-hono-web-api-shared-consts";
+import {PersonDetailModel} from "../inbound/web/vm/person-page-model-vm";
+import {EvtBackendEvents} from "./hono-web-api-shared-consts";
+import {detailsRowUrl, rowUrl} from "./route-builder";
 
-export const PersondetailsRow = (props: { vm: OOBPersonDetailModel }) => (
+export const PersondetailsRow = (props: { vm: PersonDetailModel }) => (
 		<>
 			<tr
 				id={`row-${props.vm.id}`}
@@ -10,7 +11,7 @@ export const PersondetailsRow = (props: { vm: OOBPersonDetailModel }) => (
 				hx-trigger="click"
 				hx-target="this"
 				hx-swap="outerHTML transition:true"
-				hx-get={props.vm._rowUrl}
+				hx-get={rowUrl(props.vm.id)}
 			>
 				<template
 					hx-trigger={`
@@ -18,7 +19,7 @@ export const PersondetailsRow = (props: { vm: OOBPersonDetailModel }) => (
 			`}
 					hx-target="closest tr"
 					hx-swap="outerHTML"
-					hx-get={props.vm._detailsRowUrl}
+					hx-get={detailsRowUrl(props.vm.id)}
 				></template>
 				<td style="border-style: none"><input type="checkbox" disabled value={props.vm.id}></input></td>
 				<td style="border-style: none">{props.vm.firstName}</td>

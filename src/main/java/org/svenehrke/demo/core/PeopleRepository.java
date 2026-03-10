@@ -1,21 +1,19 @@
 package org.svenehrke.demo.core;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Repository;
-import org.svenehrke.demo.inbound.web.OOBPersonDetailModel;
-import org.svenehrke.demo.inbound.web.OOBPersonEditModel;
-import org.svenehrke.demo.inbound.web.OOBPersonTableModel;
-import org.svenehrke.demo.inbound.web.OOBPersonTableRowModel;
+import org.svenehrke.demo.inbound.web.PersonDetailModel;
+import org.svenehrke.demo.inbound.web.PersonEditModel;
+import org.svenehrke.demo.inbound.web.PersonTableModel;
+import org.svenehrke.demo.inbound.web.PersonTableRowModel;
 
 import java.util.List;
 
 public interface PeopleRepository {
-    OOBPersonTableModel people();
-    OOBPersonTableModel peopleForSearch(String search);
+    PersonTableModel people();
+    PersonTableModel peopleForSearch(String search);
     int total();
-    OOBPersonTableRowModel personTableRowModel(int id);
-    OOBPersonEditModel personEditModel(int id);
-    OOBPersonDetailModel personDetailModel(int id);
+    PersonTableRowModel personTableRowModel(int id);
+    PersonEditModel personEditModel(int id);
+    PersonDetailModel personDetailModel(int id);
     int deleteByIds(List<Integer> ids);
-    int updatePerson(int id, OOBPersonEditModel personEditModel);
+    int updatePerson(int id, PersonEditModel personEditModel);
 }

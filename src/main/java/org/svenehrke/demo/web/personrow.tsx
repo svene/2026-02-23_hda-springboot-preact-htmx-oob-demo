@@ -1,14 +1,15 @@
 import {render, h} from "preact";
-import {OOBPersonTableRowModel} from "../inbound/web/vm/oob-person-page-model-vm";
+import {PersonTableRowModel} from "../inbound/web/vm/person-page-model-vm";
+import {detailsUrl} from "./route-builder";
 
-export const PersonRow = (props: {vm: OOBPersonTableRowModel}) => (
+export const PersonRow = (props: {vm: PersonTableRowModel}) => (
 	<tr
 		id={`row-${props.vm.id}`}
 		style="cursor: pointer"
 		hx-trigger="click"
 		hx-target="this"
 		hx-swap="outerHTML transition:true"
-		hx-get={props.vm._detailsLink}
+		hx-get={detailsUrl(props.vm.id)}
 	>
 		<td hx-trigger="click consume"> {/* consume: prevent bubbling, only checkbox needs to be clicked, not parents*/}
 			<input type="checkbox" name="selection" value={props.vm.id} form="bulkDeleteForm"></input>

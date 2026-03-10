@@ -1,11 +1,12 @@
 import {render, h} from "preact";
-import {OOBPersonPageModel} from "../inbound/web/vm/oob-person-page-model-vm";
+import {PersonPageModel} from "../inbound/web/vm/person-page-model-vm";
 import {PersonTable} from "./persontable";
 
 import { useSignal } from '@preact/signals';
+import {HonoWebApiConsts} from "./hono-web-api-shared-consts";
 
 
-function Cmp(props: { vm: OOBPersonPageModel }) {
+function Cmp(props: { vm: PersonPageModel }) {
 	const counter = useSignal(0);
 	return (
 		<>
@@ -21,7 +22,7 @@ function Cmp(props: { vm: OOBPersonPageModel }) {
 								name="search"
 								placeholder="Search for firstname or lastname"
 								hx-trigger="input changed delay:500ms"
-								hx-get={props.vm._tableLink}
+								hx-get={HonoWebApiConsts.PERSON_TABLE}
 								hx-target="#result-table"
 							/>
 						</div>

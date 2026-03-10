@@ -1,7 +1,8 @@
-import {OOBPersonDetailModel} from "../inbound/web/vm/oob-person-page-model-vm";
+import {PersonDetailModel} from "../inbound/web/vm/person-page-model-vm";
 import {render, h} from "preact";
+import {editUrl} from "./route-builder";
 
-export const PersondetailsCard = (props: { vm: OOBPersonDetailModel }) => (
+export const PersondetailsCard = (props: { vm: PersonDetailModel }) => (
 	<>
 		<tr
 			id={`row-${props.vm.id}-details`}
@@ -9,7 +10,7 @@ export const PersondetailsCard = (props: { vm: OOBPersonDetailModel }) => (
 			hx-trigger="click"
 			hx-target="this"
 			hx-swap="outerHTML transition:true"
-			hx-get={props.vm._editLink}
+			hx-get={editUrl(props.vm.id)}
 			_="on click from previous <tr/> remove me"
 		>
 			<td colSpan={5} style="padding-left: 30px">

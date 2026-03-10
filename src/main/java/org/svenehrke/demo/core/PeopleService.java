@@ -3,10 +3,10 @@ package org.svenehrke.demo.core;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.svenehrke.demo.inbound.web.OOBPersonDetailModel;
-import org.svenehrke.demo.inbound.web.OOBPersonEditModel;
-import org.svenehrke.demo.inbound.web.OOBPersonTableModel;
-import org.svenehrke.demo.inbound.web.OOBPersonTableRowModel;
+import org.svenehrke.demo.inbound.web.PersonDetailModel;
+import org.svenehrke.demo.inbound.web.PersonEditModel;
+import org.svenehrke.demo.inbound.web.PersonTableModel;
+import org.svenehrke.demo.inbound.web.PersonTableRowModel;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ public class PeopleService {
 		this.peopleRepository = peopleRepository;
 	}
 
-	public OOBPersonTableModel personTableModel() {
+	public PersonTableModel personTableModel() {
         return peopleRepository.people();
     }
 
-	public OOBPersonTableModel peopleForSearch(String search) {
+	public PersonTableModel peopleForSearch(String search) {
         return StringUtils.hasLength(search) ? peopleRepository.peopleForSearch(search) : peopleRepository.people();
     }
 
@@ -31,14 +31,14 @@ public class PeopleService {
         return peopleRepository.total();
     }
 
-	public OOBPersonTableRowModel personTableRowModel(int id) {
+	public PersonTableRowModel personTableRowModel(int id) {
 		return peopleRepository.personTableRowModel(id);
 	}
-	public OOBPersonEditModel personEditModel(int id) {
+	public PersonEditModel personEditModel(int id) {
 		return peopleRepository.personEditModel(id);
 	}
 
-	public OOBPersonDetailModel personDetailModel(int id) {
+	public PersonDetailModel personDetailModel(int id) {
 		return peopleRepository.personDetailModel(id);
 	}
 
@@ -48,7 +48,7 @@ public class PeopleService {
 	}
 
 	@Transactional
-	public int updatePerson(int id, OOBPersonEditModel personEditModel) {
+	public int updatePerson(int id, PersonEditModel personEditModel) {
 		return peopleRepository.updatePerson(id, personEditModel);
 	}
 

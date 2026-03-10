@@ -1,15 +1,16 @@
 import {render, h} from "preact";
-import {OOBPersonTableModel} from "../inbound/web/vm/oob-person-page-model-vm";
-import {OOBHonoWebApiConsts} from "./oob-hono-web-api-shared-consts";
+import {PersonTableModel} from "../inbound/web/vm/person-page-model-vm";
+import {HonoWebApiConsts} from "./hono-web-api-shared-consts";
 import {PersonRow} from "./personrow";
+import {detailsCardUrl} from "./route-builder";
 
-export const PersonTable = (props: { vm: OOBPersonTableModel }) => (
+export const PersonTable = (props: { vm: PersonTableModel }) => (
 	<div id="result-table">
 		<table class="table">
 			<thead>
 			<tr>
 				<td colSpan={5}>
-					<form id="bulkDeleteForm" hx-delete={props.vm._deleteLink}>
+					<form id="bulkDeleteForm" hx-delete={HonoWebApiConsts.DELETE}>
 						<button type="submit" class="button">
 							<span class="icon"><i class="material-icons">delete</i></span>
 							<span>Delete</span>
